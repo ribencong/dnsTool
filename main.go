@@ -5,6 +5,7 @@ import (
 	"github.com/spf13/cobra"
 	"net"
 	"os"
+	"time"
 )
 
 var rootCmd = &cobra.Command{
@@ -104,6 +105,10 @@ func ipRun(_ *cobra.Command, addr []string) {
 	}
 	conn, err := net.Dial(network, addr[0])
 	if err != nil {
+		panic(err)
+	}
+
+	if err := conn.SetDeadline(time.Now().Add(time.Second * 4)); err != nil {
 		panic(err)
 	}
 	n, e := conn.Write([]byte("hello!"))
