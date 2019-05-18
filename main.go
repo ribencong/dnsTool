@@ -91,8 +91,10 @@ func nameRun(_ *cobra.Command, addr []string) {
 	fmt.Print("LookupNS:")
 	fmt.Println(net.LookupNS(a))
 
-	fmt.Print("LookupSRV:")
-	fmt.Println(net.LookupSRV(addr[0], addr[1], addr[2]))
+	if len(addr) == 3 {
+		fmt.Print("LookupSRV:")
+		fmt.Println(net.LookupSRV(addr[0], addr[1], addr[2]))
+	}
 
 	fmt.Print("LookupTXT:")
 	fmt.Println(net.LookupTXT(a))
